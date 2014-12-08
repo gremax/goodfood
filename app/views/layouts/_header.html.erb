@@ -1,0 +1,45 @@
+<header class="navigation">
+  <div class="navigation-wrapper">
+    <%= link_to root_path, class: "logo" do %>
+      <%= image_tag "logo.png", alt: "Goodfood" %>
+    <% end %>
+    <a href="" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <div class="nav">
+      <ul id="navigation-menu">
+        <li class="nav-link"><%= link_to "Home",    root_path %></li>
+        <li class="nav-link"><%= link_to "About",   about_path %></li>
+        <li class="nav-link"><%= link_to "Contact", contact_path %></li>
+        <li class="nav-link more"><a href="javascript:void(0)">Recipes</a>
+          <ul class="submenu">
+            <li><a href="javascript:void(0)">Recipes Group #1</a></li>
+            <li><a href="javascript:void(0)">Recipes Group #2</a></li>
+            <li class="more"><a href="javascript:void(0)">Recipes Group #3</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Recipe Sub-Group #1</a></li>
+                <li><a href="javascript:void(0)">Recipe Sub-Group #2</a></li>
+              </ul>
+            </li>
+            <li class="more"><a href="javascript:void(0)">Recipes Group #4</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Recipe Sub-Group #1</a></li>
+                <li><a href="javascript:void(0)">Recipe Sub-Group #2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navigation-tools">
+      <div class="search-bar">
+        <div class="search-and-submit">
+          <input type="search" placeholder="Enter Search" />
+          <button type="submit">
+            <%= image_tag "search-icon.png", alt: "Search Icon" %>
+          </button>
+        </div>
+      </div>
+      <a href="javascript:void(0)" class="login">Login</a>
+      <a href="javascript:void(0)" class="sign-up">Sign Up</a>
+    </div>
+  </div>
+</header>
