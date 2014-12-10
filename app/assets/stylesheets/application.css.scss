@@ -367,6 +367,47 @@ section {
   }
 }
 
+.simple_form {
+  width: 40%;
+  margin: 0 auto;
+  .field_with_errors {
+    input {
+      border: 1px solid #ff1500;
+    }
+  }
+}
+
+$flash-red: #FBE3E4;
+$flash-yellow: #FFF6BF;
+$flash-green: #E6EFC2;
+
+%flash-base {
+  display: block;
+  font-weight: bold;
+  margin-top: $base-spacing /2;
+  margin-bottom: $base-spacing / 2;
+  padding: $base-spacing / 2;
+}
+
+$flashes: (alert: $flash-yellow, error: $flash-red, notice: lighten($base-accent-color, 40), success: $flash-green);
+
+@each $flash, $color in $flashes {
+  .flash-#{$flash} {
+    @extend %flash-base;
+    background: $color;
+    color: darken($color, 60);
+
+    a {
+      color: darken($color, 70);
+      border-bottom: 1px solid transparentize(darken($color, 70), .7);
+
+      &:hover {
+        color: darken($color, 90);
+      }
+    }
+  }
+}
+
 footer {
   margin-top: 2em;
   border-top: 1px solid $light-gray;

@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   get  'help'    => 'pages#help'
   get  'about'   => 'pages#about'
   get  'contact' => 'pages#contact'
+  get  'signup'  => 'users#new'
+  post 'signup'  => 'users#create'
 end

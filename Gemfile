@@ -14,6 +14,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'refills'
 
+gem 'simple_form'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
