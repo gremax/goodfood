@@ -38,8 +38,12 @@
           </button>
         </div>
       </div>
-      <a href="javascript:void(0)" class="login">Login</a>
+      <% unless logged_in? %>
+      <%= link_to "Sign In", signin_path, class: "sign-in" %>
       <%= link_to "Sign Up", signup_path, class: "sign-up" %>
+      <% else %>
+      <%= link_to "Sign Out", signout_path, method: :delete, class: "sign-up" %>
+      <% end %>
     </div>
   </div>
 </header>
