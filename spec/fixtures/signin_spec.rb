@@ -37,4 +37,17 @@ RSpec.describe "the signin process", :type => :feature do
     click_link 'Sign Out'
     expect(page).to have_content "See you later"
   end
+
+  it "logged in user redirect" do
+    visit signin_path
+    within(".session") do
+      fill_in 'Email',    with: "omar.crab@example.com"
+      fill_in 'Password', with: "foobar"
+    end
+    click_button 'Sign in'
+    visit signup_path
+    expect(page.current_path).to eq root_path
+    visit signin_path
+    expect(page.current_path).to eq root_path
+  end
 end
