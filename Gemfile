@@ -15,6 +15,7 @@ gem 'neat'
 gem 'refills'
 
 gem 'simple_form'
+gem 'ancestry'
 
 group :development, :test do
   gem 'sqlite3'

@@ -1,0 +1,16 @@
+<% provide(:title, "Categories") %>
+<h1>Categories</h1>
+<ul>
+<% @categories.roots.each do |parent| %>
+  <li>
+    [<%= link_to "e", edit_category_path(parent) %>]
+    [<%= link_to "x", category_path(parent), method: :delete, 
+    data: { confirm: "Are you sure?" } %>]
+    <%= link_to parent.name, parent %>
+    <%= render 'subcategory', 
+        category: parent.children if parent.has_children? %>
+  </li>
+<% end %>
+</ul>
+<hr>
+<p><%= link_to "Add new category", new_category_path %></p>

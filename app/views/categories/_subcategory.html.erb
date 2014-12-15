@@ -1,0 +1,10 @@
+<ul>
+  <% category.each do |child| %>
+  <li>
+    [<%= link_to 'e', edit_category_path(child) %>]
+    [<%= link_to 'x', category_path(child), method: :delete, 
+    data: { confirm: "Are you sure?" } %>]
+    - <%= link_to child.name, child %>
+  </li>
+  <% end %>
+</ul>

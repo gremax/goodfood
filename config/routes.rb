@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post   'signup'  => 'users#create'
   post   'signin'  => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
+  resources :categories
 end

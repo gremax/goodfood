@@ -1,0 +1,5 @@
+<%= simple_form_for @category do |f| %>
+<%= f.input :name %>
+<%= f.input :parent_id, collection: Category.where(ancestry: nil) %>
+<%= f.submit %>
+<% end %>

@@ -11,20 +11,18 @@
         <li class="nav-link"><%= link_to "Contact", contact_path %></li>
         <li class="nav-link more"><a href="javascript:void(0)">Recipes</a>
           <ul class="submenu">
-            <li><a href="javascript:void(0)">Recipes Group #1</a></li>
-            <li><a href="javascript:void(0)">Recipes Group #2</a></li>
-            <li class="more"><a href="javascript:void(0)">Recipes Group #3</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Recipe Sub-Group #1</a></li>
-                <li><a href="javascript:void(0)">Recipe Sub-Group #2</a></li>
-              </ul>
-            </li>
-            <li class="more"><a href="javascript:void(0)">Recipes Group #4</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Recipe Sub-Group #1</a></li>
-                <li><a href="javascript:void(0)">Recipe Sub-Group #2</a></li>
-              </ul>
-            </li>
+            <% Category.roots.each do |category| %>
+              <% if category.has_children? %>
+                <li class="more"><%= link_to category.name, '' %>
+                <ul class="submenu">
+                <% category.children.each do |child| %>
+                  <li><%= link_to child.name, child %></li>
+                <% end %>
+                </ul>
+              <% else %>
+                <li><%= link_to category.name, category %></li>
+              <% end %>
+            <% end %>
           </ul>
         </li>
       </ul>
