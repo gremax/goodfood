@@ -1,0 +1,14 @@
+<ul class="accordion">
+  <% Category.roots.each do |parent| %>
+  <li>
+    <%= link_to parent.name, parent, class: ("js-accordion-trigger" if parent.has_children?) %>
+    <% if parent.has_children? %>
+    <ul class="submenu">
+      <% parent.children.each do |child| %>
+        <li><%= link_to child.name, child %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

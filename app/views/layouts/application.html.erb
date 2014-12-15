@@ -13,10 +13,20 @@
   <% flash.each do |key, value| %>
     <div class="flash-<%= key %>"><%= value %></div>
   <% end %>
+  <div id="menu">
+    <%= render 'layouts/menu' %>
+  </div>
   <div id="content">
     <%= yield %>
   </div>
 </section>
 <%= render 'layouts/footer' %>
+<script>
+$('.js-accordion-trigger').bind('click', function(e){
+  jQuery(this).parent().find('.submenu').slideToggle('fast');  // apply the toggle to the ul
+  jQuery(this).parent().toggleClass('is-expanded');
+  e.preventDefault();
+});
+</script>
 </body>
 </html>
