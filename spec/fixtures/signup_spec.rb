@@ -6,8 +6,8 @@ RSpec.describe "the signup process", :type => :feature do
     within("#new_user") do
       fill_in 'Name',     with: "Omar Crab"
       fill_in 'Email',    with: "omar.crab@example.com"
-      fill_in 'Password', with: "foobar"
-      fill_in 'Password confirmation', with: "foobar"
+      fill_in 'user_password', with: "foobar"
+      fill_in 'user_password_confirmation', with: "foobar"
     end
     click_button 'Sign up'
     expect(page).to have_content 'Welcome aboard!'
@@ -18,8 +18,8 @@ RSpec.describe "the signup process", :type => :feature do
     within("#new_user") do
       fill_in 'Name',     with: ""
       fill_in 'Email',    with: ""
-      fill_in 'Password', with: ""
-      fill_in 'Password confirmation', with: ""
+      fill_in 'user_password', with: ""
+      fill_in 'user_password_confirmation', with: ""
     end
     click_button 'Sign up'
     expect(page).to have_content 'Form contains some errors'

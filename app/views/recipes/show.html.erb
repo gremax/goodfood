@@ -1,0 +1,11 @@
+<% provide(:title, "#{@recipe.category.name} · #{@recipe.name}") %>
+<article class="type-system-geometric">
+  <h1><%= @recipe.name %></h1>
+  <p class="date"><%= @recipe.created_at.to_formatted_s(:short) %></p>
+  <h2>Recipe</h2>
+  <p><%= simple_format @recipe.body %></p>
+  <h2>Ingredients</h2>
+  <p><%= simple_format @recipe.ingredients %></p>
+  <hr>
+  <p class="author"><%= @recipe.user.name %></p>
+</article>

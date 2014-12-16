@@ -20,4 +20,8 @@ module SessionsHelper
   def signed_in_user
     redirect_to root_path if logged_in?
   end
+
+  def not_signed_in
+    redirect_to root_path unless logged_in?
+  end
 end

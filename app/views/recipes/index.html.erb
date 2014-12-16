@@ -1,0 +1,24 @@
+<h1>All recipes</h1>
+
+<table class="table-borders">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+    <tr>
+      <td><%= link_to recipe.name, recipe %></td>
+      <td><%= recipe.category.parent.name %> &gt; <%= recipe.category.name %></td>
+      <td>
+        <button><%= link_to 'Edit', edit_recipe_path(recipe) %></button>
+        <button><%= link_to 'Destroy', recipe_path(recipe), method: :delete, 
+                                    data: { confirm: "Are you sure?" }%></button>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

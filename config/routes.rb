@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post   'signin'  => 'sessions#create'
   delete 'signout' => 'sessions#destroy'
   resources :categories
+  resources :recipes
 end

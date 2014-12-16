@@ -1,2 +1,14 @@
 <% provide(:title, @category.name) %>
 <h1><%= @category.name %></h1>
+<% @category.recipes.each do |recipe| %>
+<article class="type-system-geometric">
+  <h2><%= link_to recipe.name, recipe %></h2>
+  <p class="date"><%= recipe.created_at.to_formatted_s(:short) %></p>
+  <p><%= simple_format(truncate(recipe.body.gsub(/(<[^>]+>)/, ' '), 
+                       length: 300, separator: ' ') { 
+                       link_to "Read More", recipe_path(recipe), 
+                       class: "read-more" }) %></p>
+  </p>
+  <hr>
+</article>
+<% end %>

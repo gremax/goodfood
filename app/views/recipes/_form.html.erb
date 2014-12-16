@@ -1,0 +1,7 @@
+<%= simple_form_for @recipe do |f| %>
+<%= f.input :name, required: true %>
+<%= f.input :body, required: true %>
+<%= f.input :ingredients, required: true %>
+<%= f.association :category, prompt: "Select category", required: true %>
+<%= f.submit %>
+<% end %>
