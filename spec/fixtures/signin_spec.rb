@@ -1,53 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe "the signin process", :type => :feature do
-  before :each do
-    @user = User.create(name: "Omar Crab", email: "omar.crab@example.com", 
-                        password: "foobar", password_confirmation: "foobar")
+
+  before { visit signin_path }
+
+  describe "with valid information" do
+  
+    let(:user) { FactoryGirl.create(:user) }
+    
+    before do
+        fill_in 'Email',    with: user.email
+        fill_in 'Password', with: user.password
+        click_button 'Sign in'
+    end
+
+    it "signs me in" do
+      expect(page).to     have_content "Hi, #{user.name}!"
+      expect(page).to     have_link('Sign Out', href: signout_path)
+      expect(page).not_to have_link('Sign In',  href: signin_path)
+    end
+
+    it "signs me out" do
+      click_link 'Sign Out'
+      expect(page).to have_content "See you later"
+    end
+
+    it "logged in user redirect" do
+      visit signup_path
+      expect(page.current_path).to eq root_path
+      visit signin_path
+      expect(page.current_path).to eq root_path
+    end
   end
 
-  it "signs me in" do
-    visit signin_path
-    within(".session") do
-      fill_in 'Email',    with: "omar.crab@example.com"
-      fill_in 'Password', with: "foobar"
-    end
-    click_button 'Sign in'
-    expect(page).to have_content "Hi, #{@user.name}!"
-  end
-
-  it "with invalid combination email/password" do
-    visit signin_path
-    within(".session") do
-      fill_in 'Email',    with: "  "
-      fill_in 'Password', with: "  "
-    end
+  it "with blank email/password" do
     click_button 'Sign in'
     expect(page).to have_content "Invalid email/password combination!"
-  end
-
-  it "signs me out" do
-    visit signin_path
-    within(".session") do
-      fill_in 'Email',    with: "omar.crab@example.com"
-      fill_in 'Password', with: "foobar"
-    end
-    click_button 'Sign in'
-    visit root_path
-    click_link 'Sign Out'
-    expect(page).to have_content "See you later"
-  end
-
-  it "logged in user redirect" do
-    visit signin_path
-    within(".session") do
-      fill_in 'Email',    with: "omar.crab@example.com"
-      fill_in 'Password', with: "foobar"
-    end
-    click_button 'Sign in'
-    visit signup_path
-    expect(page.current_path).to eq root_path
-    visit signin_path
-    expect(page.current_path).to eq root_path
   end
 end
