@@ -15,6 +15,7 @@ RSpec.describe "the signup process", :type => :feature do
     end
     expect { click_button submit }.to change(User, :count).by(1)
     expect(page).to have_selector('div.flash-success')
+    expect(page).to have_content('Sign Out')
   end
 
   it "sign up error" do
