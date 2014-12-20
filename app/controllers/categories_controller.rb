@@ -1,10 +1,12 @@
 class CategoriesController < ApplicationController
+  before_action :category_set, only: [:show, :edit, :update, :destroy]
+  before_action :user_is_admin
+
   def index
     @categories = Category.all
   end
 
   def show
-    @category = Category.find(params[:id])
   end
 
   def new
@@ -22,11 +24,9 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
     if @category.update(category_params)
       redirect_to categories_path, notice: "Category successfully updated."
     else
@@ -36,8 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    category = Category.find(params[:id])
-    category.destroy
+    @category.destroy
     redirect_to categories_path, notice: "Category successfully deleted."
   end
 
@@ -45,5 +44,9 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :parent_id)
+  end
+
+  def category_set
+    @category = Category.find(params[:id])
   end
 end

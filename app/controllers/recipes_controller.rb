@@ -1,12 +1,13 @@
 class RecipesController < ApplicationController
+  before_action :recipe_set, only: [:show, :edit, :update, :destroy]
   before_action :not_signed_in, except: :show
+  before_action :user_is_admin, only: [:index, :destroy]
 
   def index
     @recipes = Recipe.all
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
     @recipe.update_attribute(:views, @recipe.views += 1)
   end
 
@@ -25,11 +26,9 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
       redirect_to @recipe, notice: "Recipe sucessfully updated."
     else
@@ -39,14 +38,17 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
-    redirect_to root_path, notice: "Recipe successfully deleted."
+    redirect_to recipes_path, notice: "Recipe successfully deleted."
   end
 
   private
 
   def recipe_params
     params.require(:recipe).permit(:name, :body, :ingredients, :category_id)
+  end
+  
+  def recipe_set
+    @recipe = Recipe.find(params[:id])
   end
 end

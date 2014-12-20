@@ -24,4 +24,15 @@ module SessionsHelper
   def not_signed_in
     redirect_to root_path unless logged_in?
   end
+
+  def admin?
+    @current_user.admin == true
+  end
+
+  def user_is_admin
+    unless logged_in? && current_user.admin?
+      flash[:error] = "Access denied."
+      redirect_to root_path
+    end
+  end
 end

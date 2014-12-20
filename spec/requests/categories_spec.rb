@@ -1,8 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Categories", :type => :request do
+
   let(:base_title) { "Goodfood" }
-  before { @category = Category.create(name: "Breads and Doughs")}
+  let(:user)       { FactoryGirl.create(:user) }
+
+  before do 
+    @category = Category.create(name: "Breads and Doughs")
+    user.admin = true
+    user.save
+    visit signin_path
+    fill_in 'Email',    with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Sign in'
+  end
 
   describe "List" do
     it "should have the content 'Categories'" do
